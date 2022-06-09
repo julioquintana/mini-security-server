@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository
     extends JpaRepository<User, String>, JpaSpecificationExecutor<User> {
   Optional<User> findByDni(String dni);
+
+  Optional<User> findByDniAndStatusIsTrue(String dni);
 }

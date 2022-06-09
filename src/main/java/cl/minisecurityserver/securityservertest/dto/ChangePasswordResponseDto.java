@@ -9,12 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponseDto {
-  private String id;
-  private String dni;
-  private String prefix;
-  private String name;
-  private String token;
+@NoArgsConstructor
+public class ChangePasswordResponseDto {
+
+  private String status;
+  private String description;
 }

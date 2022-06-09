@@ -1,11 +1,11 @@
-package cl.qs.securitycoreserver.controller;
+package cl.minisecurityserver.securityservertest.controller;
 
-import cl.qs.securitycoreserver.dto.ChangePasswordResponseDto;
-import cl.qs.securitycoreserver.dto.auth.AuthRequestDto;
-import cl.qs.securitycoreserver.dto.auth.AuthResponseDto;
-import cl.qs.securitycoreserver.dto.auth.ChangePasswordRequestDto;
-import cl.qs.securitycoreserver.exception.SecurityCoreServerException;
-import cl.qs.securitycoreserver.service.interfaces.AuthServiceInterface;
+import cl.minisecurityserver.securityservertest.dto.AuthRequestDto;
+import cl.minisecurityserver.securityservertest.dto.AuthResponseDto;
+import cl.minisecurityserver.securityservertest.dto.ChangePasswordRequestDto;
+import cl.minisecurityserver.securityservertest.dto.ChangePasswordResponseDto;
+import cl.minisecurityserver.securityservertest.exceptions.SecurityServerException;
+import cl.minisecurityserver.securityservertest.service.IAuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Auth Controller", description = "The level API from Server Security Core ")
 public class AuthController {
 
-  private final AuthServiceInterface authServiceInterface;
+  private final IAuthService service;
 
   @Autowired
-  public AuthController(AuthServiceInterface authServiceInterface) {
-    this.authServiceInterface = authServiceInterface;
+  public AuthController(IAuthService service) {
+    this.service = service;
   }
 
   @PostMapping("/login")
   public HttpEntity<AuthResponseDto> save(@Valid @RequestBody AuthRequestDto authRequestDto)
-      throws SecurityCoreServerException {
-    return new ResponseEntity<>(authServiceInterface.login(authRequestDto), HttpStatus.CREATED);
+      throws SecurityServerException {
+    return new ResponseEntity<>(service.login(authRequestDto), HttpStatus.CREATED);
   }
 
   @PostMapping("/change_password")
   public HttpEntity<ChangePasswordResponseDto> changePassword(
-      @Valid @RequestBody ChangePasswordRequestDto authRequestDto)
-      throws SecurityCoreServerException {
-    return new ResponseEntity<>(
-        authServiceInterface.changePassword(authRequestDto),
-        HttpStatus.CREATED);
+      @Valid @RequestBody ChangePasswordRequestDto authRequestDto) throws SecurityServerException {
+    return new ResponseEntity<>(service.changePassword(authRequestDto), HttpStatus.CREATED);
   }
-
 }

@@ -2,6 +2,8 @@ package cl.minisecurityserver.securityservertest.util;
 
 import cl.minisecurityserver.securityservertest.dao.entity.User;
 import cl.minisecurityserver.securityservertest.dao.entity.pk.UserPK;
+import cl.minisecurityserver.securityservertest.dto.AuthResponseDto;
+import cl.minisecurityserver.securityservertest.dto.ChangePasswordResponseDto;
 import cl.minisecurityserver.securityservertest.dto.UserRequestDto;
 import cl.minisecurityserver.securityservertest.dto.UserResponseDto;
 import cl.minisecurityserver.securityservertest.security.PasswordUtil;
@@ -47,5 +49,25 @@ public class UserMapper {
   public static List<UserResponseDto> build(List<User> roles) {
 
     return roles.stream().map(UserMapper::build).collect(Collectors.toList());
+  }
+
+  public static AuthResponseDto buildAuthResponseDto(User user, String token) {
+    return AuthResponseDto.builder()
+        .id(user.getId().getId())
+        .dni(user.getDni())
+        .prefix(user.getPrefix())
+        .name(user.getName())
+        .token(token)
+        .build();
+  }
+
+  public static ChangePasswordResponseDto buildChangePasswordResponseDto(
+      String status, String description) {
+    return ChangePasswordResponseDto.builder().status(status).description(description).build();
+  }
+
+  public static User buildChangePassword(String passwords, User user) {
+    user.setPassword(passwords);
+    return user;
   }
 }

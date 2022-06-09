@@ -1,4 +1,4 @@
-package cl.qs.securitycoreserver.dto.auth;
+package cl.minisecurityserver.securityservertest.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,13 +13,13 @@ public class ChangePasswordRequestDto {
 
   @NotNull
   @Size(min = 1, max = 128)
-  private String email;
+  private String dni;
+
   @NotNull
   @Size(min = 1, max = 512)
   private String password;
+
   @NotNull
   @Size(min = 1, max = 512)
   private String newPassword;
-  @NotNull
-  private Long applicationId;
 }

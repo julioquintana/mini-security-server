@@ -11,13 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "privileges", schema = "security")
@@ -25,8 +29,10 @@ public class Privilege {
   @EmbeddedId private PrivilegePK id;
   private String key;
   private String description;
-  private java.sql.Timestamp createdAt;
+  @UpdateTimestamp
   private java.sql.Timestamp updatedAt;
+  @CreationTimestamp
+  private java.sql.Timestamp createdAt;
 
   @ManyToOne
   @JsonBackReference
@@ -43,7 +49,9 @@ public class Privilege {
         updatable = false)
   })
   private Role role;
+
   @PrePersist
   public void generateId() {
     this.getId().setId(UUID.randomUUID().toString());
-  }}
+  }
+}

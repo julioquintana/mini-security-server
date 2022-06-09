@@ -40,14 +40,14 @@ public class RoleServiceImpl implements IRolesService {
     var response =
         repository.findAll(
             where(RoleSpecification.idProfileEquals(profileId))
-                .and(RoleSpecification.idRoleEquals(id))
+                .and(RoleSpecification.idEquals(id))
                 .and(RoleSpecification.keyEquals(key))
                 .and(RoleSpecification.descriptionEquals(description)),
             pageable);
     if (response.isEmpty())
       throw new SecurityServerException(
           Constant.ERROR,
-          Constant.PROFILE_EMPTY_LIST,
+          Constant.EMPTY_LIST,
           Constant.GENERIC_ERROR,
           HttpStatus.NOT_FOUND);
     return RoleMapper.build(response);

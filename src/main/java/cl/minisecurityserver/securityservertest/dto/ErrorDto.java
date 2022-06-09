@@ -1,10 +1,9 @@
-package com.cencosud.orderreturnservice.exceptions;
+package cl.minisecurityserver.securityservertest.dto;
 
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Map;
 
 @Getter
 @Setter

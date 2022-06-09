@@ -17,6 +17,12 @@ public class LogFormatter extends ObjectMapperConfig {
   private String reason;
   private Object payload;
 
+  public LogFormatter(String method, String message, Object payload) {
+    this.method = method;
+    this.payload = payload;
+    this.message = message;
+    this.reason = null;
+  }
   @SneakyThrows
   @Override
   public String toString() {

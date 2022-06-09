@@ -45,7 +45,7 @@ public class ProfileServiceImpl implements IProfileService {
     if (response.isEmpty())
       throw new SecurityServerException(
           Constant.ERROR,
-          Constant.PROFILE_EMPTY_LIST,
+          Constant.EMPTY_LIST,
           Constant.GENERIC_ERROR,
           HttpStatus.NOT_FOUND);
     return ProfileMapper.build(response);

@@ -9,10 +9,10 @@ import org.springframework.data.jpa.domain.Specification;
 @Builder
 public class RoleSpecification {
 
-  public static Specification<Role> idRoleEquals(final String idRole) {
+  public static Specification<Role> idEquals(final String id) {
     return (root, query, criteriaBuilder) -> {
-      if (idRole != null) {
-        return criteriaBuilder.equal(root.get(Role_.ID).get(RolePK_.ID), idRole);
+      if (id != null) {
+        return criteriaBuilder.equal(root.get(Role_.ID).get(RolePK_.ID), id);
       }
       return criteriaBuilder.conjunction();
     };

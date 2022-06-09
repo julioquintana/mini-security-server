@@ -20,10 +20,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user", schema = "security")
-public class User  implements Serializable {
+public class User implements Serializable {
 
-  @Serial
-  private static final long serialVersionUID = 1L;
+  @Serial private static final long serialVersionUID = 1L;
 
   @EmbeddedId private UserPK id;
   private String dni;

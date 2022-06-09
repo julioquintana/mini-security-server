@@ -27,12 +27,8 @@ public class ErrorHandler {
       messages.put(field.getField(), field.getDefaultMessage());
     }
     ErrorDto errorResponse =
-        new ErrorDto(
-            Constant.ERROR,
-            "MethodArgumentNotValidException",
-            messages);
-    log.error(
-        new LogFormatter(Constant.ERROR, "MethodArgumentNotValidException", errorResponse));
+        new ErrorDto(Constant.ERROR, "MethodArgumentNotValidException", messages);
+    log.error(new LogFormatter(Constant.ERROR, "MethodArgumentNotValidException", errorResponse));
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
@@ -40,11 +36,7 @@ public class ErrorHandler {
   public ResponseEntity<ErrorDto> jsonMappingException(JsonMappingException e) {
     Map<String, String> messages = new LinkedHashMap<>();
     messages.put(Constant.ERROR, e.getMessage());
-    ErrorDto errorResponse =
-        new ErrorDto(
-            Constant.ERROR,
-            "JsonMappingException",
-            messages);
+    ErrorDto errorResponse = new ErrorDto(Constant.ERROR, "JsonMappingException", messages);
     log.error(new LogFormatter(Constant.ERROR, "JsonMappingException", errorResponse));
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
@@ -53,11 +45,7 @@ public class ErrorHandler {
   public ResponseEntity<ErrorDto> appException(SecurityServerException e) {
     Map<String, String> messages = new LinkedHashMap<>();
     messages.put(e.getSeverity(), e.getMessage());
-    ErrorDto errorResponse =
-        new ErrorDto(
-            e.getCodError(),
-            "SecurityServerException",
-            messages);
+    ErrorDto errorResponse = new ErrorDto(e.getCodError(), "SecurityServerException", messages);
     log.error(new LogFormatter(Constant.ERROR, "SecurityServerException", errorResponse));
     return new ResponseEntity<>(errorResponse, e.getStatus());
   }
@@ -66,13 +54,8 @@ public class ErrorHandler {
   public ResponseEntity<ErrorDto> exception(Exception e) {
     Map<String, String> messages = new LinkedHashMap<>();
     messages.put(Constant.ERROR, e.getMessage());
-    ErrorDto errorResponse =
-        new ErrorDto(
-            Constant.ERROR,
-            "Exception",
-            messages);
+    ErrorDto errorResponse = new ErrorDto(Constant.ERROR, "Exception", messages);
     log.error(new LogFormatter(Constant.ERROR, "Exception", errorResponse));
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
-
 }

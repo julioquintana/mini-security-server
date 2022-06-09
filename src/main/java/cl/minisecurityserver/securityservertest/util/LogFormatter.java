@@ -23,6 +23,7 @@ public class LogFormatter extends ObjectMapperConfig {
     this.message = message;
     this.reason = null;
   }
+
   @SneakyThrows
   @Override
   public String toString() {

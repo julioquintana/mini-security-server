@@ -16,3 +16,6 @@ spring:
     password: ${DB_PASSWORD}
     username: ${DB_USER}
     url: ${DB_URL}
+springdoc:
+  api-docs:
+    path= /docs:

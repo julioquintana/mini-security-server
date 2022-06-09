@@ -1,7 +1,12 @@
 package cl.minisecurityserver.securityservertest.dao.entity;
 
 import cl.minisecurityserver.securityservertest.dao.entity.pk.UserPK;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.io.Serial;
+import java.io.Serializable;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -11,10 +16,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user", schema = "security")
-public class User {
+public class User  implements Serializable {
+
+  @Serial
+  private static final long serialVersionUID = 1L;
 
   @EmbeddedId private UserPK id;
   private String dni;
@@ -23,5 +32,13 @@ public class User {
   private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
-  @ManyToOne private Profile profile;
+
+  @ManyToOne
+  @JsonBackReference
+  @JoinColumn(
+      name = "profile_id",
+      referencedColumnName = "id",
+      insertable = false,
+      updatable = false)
+  private Profile profile;
 }

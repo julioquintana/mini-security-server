@@ -2,6 +2,7 @@ package cl.minisecurityserver.securityservertest.dao.entity.pk;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,24 @@ public class PrivilegePK implements Serializable {
   @Column(name = "role_id")
   private String roleId;
 
-  private Integer id;
+  private String id;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    PrivilegePK that = (PrivilegePK) o;
+    return Objects.equals(profileId, that.profileId)
+        && Objects.equals(roleId, that.roleId)
+        && Objects.equals(id, that.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(profileId, roleId, id);
+  }
 }

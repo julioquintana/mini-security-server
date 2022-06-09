@@ -1,8 +1,12 @@
 package cl.minisecurityserver.securityservertest.dao.entity;
 
 import cl.minisecurityserver.securityservertest.dao.entity.pk.RolePK;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,6 +17,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "roles", schema = "security")
@@ -21,11 +26,30 @@ public class Role {
   @EmbeddedId private RolePK id;
   private String name;
   private String description;
-  private long createdFor;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
-  @ManyToOne private Profile profile;
 
-  @OneToMany(mappedBy = "role")
+  @ManyToOne
+  @JsonBackReference
+  @JoinColumn(
+      name = "profile_id",
+      referencedColumnName = "id",
+      insertable = false,
+      updatable = false)
+  private Profile profile;
+
+  @OneToMany
+  @JoinColumns({
+    @JoinColumn(
+        name = "profile_id",
+        referencedColumnName = "profile_id",
+        updatable = false,
+        insertable = false),
+    @JoinColumn(
+        name = "role_id",
+        referencedColumnName = "id",
+        updatable = false,
+        insertable = false)
+  })
   private List<Privilege> privileges;
 }

@@ -29,10 +29,8 @@ public class Privilege {
   @EmbeddedId private PrivilegePK id;
   private String key;
   private String description;
-  @UpdateTimestamp
-  private java.sql.Timestamp updatedAt;
-  @CreationTimestamp
-  private java.sql.Timestamp createdAt;
+  @UpdateTimestamp private java.sql.Timestamp updatedAt;
+  @CreationTimestamp private java.sql.Timestamp createdAt;
 
   @ManyToOne
   @JsonBackReference

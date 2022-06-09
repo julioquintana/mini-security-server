@@ -48,10 +48,7 @@ public class PrivilegeServiceImpl implements IPrivilegesService {
             pageable);
     if (response.isEmpty())
       throw new SecurityServerException(
-          Constant.ERROR,
-          Constant.EMPTY_LIST,
-          Constant.GENERIC_ERROR,
-          HttpStatus.NOT_FOUND);
+          Constant.ERROR, Constant.EMPTY_LIST, Constant.GENERIC_ERROR, HttpStatus.NOT_FOUND);
     return PrivilegeMapper.build(response);
   }
 }

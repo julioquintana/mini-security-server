@@ -1,6 +1,6 @@
 package cl.minisecurityserver.securityservertest.dto;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,11 +12,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Setter
 @Builder
 @AllArgsConstructor
-public class ProfileResponseDto {
+public class RoleResponseDto {
+  @JsonProperty("profile_id")
+  private String profileId;
+
   private String id;
-  private String name;
-  private Boolean status;
-  private List<RoleResponseDto> roles;
+  private String key;
+  private String description;
   @UpdateTimestamp private java.sql.Timestamp updatedAt;
   @CreationTimestamp private java.sql.Timestamp createdAt;
 }

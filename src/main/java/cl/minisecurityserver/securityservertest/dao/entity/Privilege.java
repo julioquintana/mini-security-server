@@ -2,11 +2,13 @@ package cl.minisecurityserver.securityservertest.dao.entity;
 
 import cl.minisecurityserver.securityservertest.dao.entity.pk.PrivilegePK;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.UUID;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @Table(name = "privileges", schema = "security")
 public class Privilege {
   @EmbeddedId private PrivilegePK id;
-  private String name;
+  private String key;
   private String description;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
@@ -41,4 +43,7 @@ public class Privilege {
         updatable = false)
   })
   private Role role;
-}
+  @PrePersist
+  public void generateId() {
+    this.getId().setId(UUID.randomUUID().toString());
+  }}

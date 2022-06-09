@@ -33,8 +33,7 @@ public class UserPK implements Serializable {
       return false;
     }
     UserPK userPK = (UserPK) o;
-    return Objects.equals(profileId, userPK.profileId) && Objects.equals(id,
-        userPK.id);
+    return Objects.equals(profileId, userPK.profileId) && Objects.equals(id, userPK.id);
   }
 
   @Override

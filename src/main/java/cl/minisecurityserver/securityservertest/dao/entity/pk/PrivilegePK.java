@@ -25,7 +25,7 @@ public class PrivilegePK implements Serializable {
   @Column(name = "role_id")
   private String roleId;
 
-  private Integer id;
+  private String id;
 
   @Override
   public boolean equals(Object o) {
@@ -36,8 +36,9 @@ public class PrivilegePK implements Serializable {
       return false;
     }
     PrivilegePK that = (PrivilegePK) o;
-    return Objects.equals(profileId, that.profileId) && Objects.equals(roleId,
-        that.roleId) && Objects.equals(id, that.id);
+    return Objects.equals(profileId, that.profileId)
+        && Objects.equals(roleId, that.roleId)
+        && Objects.equals(id, that.id);
   }
 
   @Override
